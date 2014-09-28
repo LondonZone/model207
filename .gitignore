@@ -1,3 +1,6 @@
+# Windows junk
+Thumbs.db
+
 # Built application files
 *.apk
 *.ap_
@@ -24,3 +27,31 @@ proguard/
 
 # Log Files
 *.log
+
+# Eclipse
+*target*
+*.jar
+*.war
+*.ear
+
+# eclipse specific git ignore
+*.pydevproject
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
