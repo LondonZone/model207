@@ -1,7 +1,7 @@
-modal207
+model207
 ========
 
-Modal answer for CSC207 Project (2014 Fall).
+Model answer for CSC207 Project (2014 Fall).
 
 Created using Eclipse 4.4.0 (Luna). 
 
