@@ -4,5 +4,11 @@
     <string name="app_name">Triage 207</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    
+    <!-- Login activity -->
+    <string name="title_activity_login">Login</string>
+    <string name="action_register">Register</string>
+    <string name="login_username">Username</string>
+    <string name="login_password">Password</string>
 
 </resources>

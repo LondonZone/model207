@@ -1,5 +1,9 @@
-package me.echeung.triage207;
+package activities;
 
+import me.echeung.triage207.R;
+import me.echeung.triage207.R.id;
+import me.echeung.triage207.R.layout;
+import me.echeung.triage207.R.menu;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
