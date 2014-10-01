@@ -8,19 +8,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
+import classes.Nurse;
+import classes.Physician;
 
 public class LoginActivity extends Activity {
 
-	private EditText username;
-	private EditText password;
+	private TextView mLoginMessage;
+	private EditText mUsername;
+	private EditText mPassword;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 
-		username = (EditText) findViewById(R.id.login_username);
-		password = (EditText) findViewById(R.id.login_password);
+		mLoginMessage = (TextView) findViewById(R.id.login_message);
+		mUsername = (EditText) findViewById(R.id.login_username);
+		mPassword = (EditText) findViewById(R.id.login_password);
 	}
 
 	@Override
@@ -47,7 +52,48 @@ public class LoginActivity extends Activity {
 	public void onBackPressed() {
 	}
 
+	/**
+	 * Handles the "Log in" button in the login form.
+	 *
+	 * @param view
+	 *            The "Log in" button.
+	 */
 	public void logIn(View view) {
-		AppState.setUser();
+		// Get the values from the form
+		final String username = mUsername.getText().toString();
+		final String password = mPassword.getText().toString();
+
+		// Check that the username is valid
+		if (AppState.hasNurse(username) || AppState.hasPhysician(username)) {
+			// Sign in the Nurse or Physician if the password is correct
+			if (AppState.hasNurse(username)) {
+				Nurse nurse = AppState.getNurses().get(username);
+
+				if (nurse.getPassword().equals(password)) {
+					AppState.setLoggedIn(true);
+
+					// Set the current user text in the main activity
+					AppState.setCurrentUser(AppState.getNurses().get(username));
+
+					this.finish();
+				}
+			} else if (AppState.hasPhysician(username)) {
+				Physician physician = AppState.getPhysicians().get(username);
+
+				if (physician.getPassword().equals(password)) {
+					AppState.setLoggedIn(true);
+
+					// Set the current user text in the main activity
+					AppState.setCurrentUser(AppState.getPhysicians().get(
+							username));
+
+					this.finish();
+				}
+			} else {
+				mLoginMessage.setText(R.string.login_error_pass);
+			}
+		} else {
+			mLoginMessage.setText(R.string.login_error_user);
+		}
 	}
 }

@@ -10,5 +10,7 @@
     <string name="action_register">Register</string>
     <string name="login_username">Username</string>
     <string name="login_password">Password</string>
+    <string name="login_error_pass">Password is incorrect</string>
+    <string name="login_error_user">User does not exist</string>
 
 </resources>

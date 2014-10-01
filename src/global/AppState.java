@@ -45,4 +45,44 @@ public class AppState extends Application {
 		AppState.currentUser = currentUser;
 	}
 
+	public static Map<String, Nurse> getNurses() {
+		return nurses;
+	}
+
+	public static void setNurses(Map<String, Nurse> nurses) {
+		AppState.nurses = nurses;
+	}
+
+	public static void addNurse(Nurse nurse) {
+		AppState.nurses.put(nurse.getUsername(), nurse);
+	}
+
+	public static void removeNurse(Nurse nurse) {
+		AppState.nurses.remove(nurse.getUsername());
+	}
+
+	public static boolean hasNurse(String username) {
+		return AppState.nurses.containsKey(username);
+	}
+
+	public static Map<String, Physician> getPhysicians() {
+		return physicians;
+	}
+
+	public static void setPhysicians(Map<String, Physician> physicians) {
+		AppState.physicians = physicians;
+	}
+
+	public static void addPhysician(Physician physician) {
+		AppState.physicians.put(physician.getUsername(), physician);
+	}
+
+	public static void removePhysician(Physician physician) {
+		AppState.physicians.remove(physician.getUsername());
+	}
+
+	public static boolean hasPhysician(String username) {
+		return AppState.physicians.containsKey(username);
+	}
+
 }
