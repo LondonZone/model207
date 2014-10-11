@@ -2,7 +2,7 @@ package classes;
 
 import global.AppState;
 
-public class Physician extends User {
+public class Physician extends User<Physician> {
 
 	public Physician(String username, String password) {
 		super(username, password);
@@ -31,7 +31,7 @@ public class Physician extends User {
 	 *            An array of contents used to instantiate this Physician.
 	 * @return The instantiated Physician.
 	 */
-	// @Override
+	@Override
 	public Physician scan(String[] fields) {
 		Physician physician = new Physician(fields[0], fields[1]);
 		AppState.addPhysician(physician);

@@ -16,7 +16,7 @@ import classes.User;
 public class AppState extends Application {
 
 	private static boolean loggedIn;
-	private static User currentUser;
+	private static User<?> currentUser;
 
 	private static Map<String, Nurse> nurses;
 	private static Map<String, Physician> physicians;
@@ -46,11 +46,11 @@ public class AppState extends Application {
 		AppState.loggedIn = loggedIn;
 	}
 
-	public static User getCurrentUser() {
+	public static User<?> getCurrentUser() {
 		return currentUser;
 	}
 
-	public static void setCurrentUser(User currentUser) {
+	public static void setCurrentUser(User<?> currentUser) {
 		AppState.currentUser = currentUser;
 	}
 

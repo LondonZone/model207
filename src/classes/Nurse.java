@@ -2,7 +2,7 @@ package classes;
 
 import global.AppState;
 
-public class Nurse extends User {
+public class Nurse extends User<Nurse> {
 
 	public Nurse(String username, String password) {
 		super(username, password);
@@ -62,7 +62,7 @@ public class Nurse extends User {
 	 *            An array of contents used to instantiate this Nurse.
 	 * @return The instantiated Nurse.
 	 */
-	// @Override
+	@Override
 	public Nurse scan(String[] fields) {
 		Nurse nurse = new Nurse(fields[0], fields[1]);
 		AppState.addNurse(nurse);

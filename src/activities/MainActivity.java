@@ -42,11 +42,17 @@ public class MainActivity extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		switch (item.getItemId()) {
+		case R.id.action_search:
 			return true;
+		case R.id.action_new:
+			startActivity(new Intent(this, NewPatientActivity.class));
+			return true;
+		case R.id.action_save:
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
 		}
-		return super.onOptionsItemSelected(item);
 	}
 
 	public void updateAdapter() {

@@ -25,13 +25,19 @@
     <string name="physician">Physician</string>
 
     <!-- Main (patients list) activity -->
+    <string name="action_search">Search</string>
     <string name="action_add">Add Patient</string>
+    <string name="action_save">Save data</string>
     <string name="logged_in_as">Logged in as </string>
     <string name="action_signout">Sign out</string>
     <string name="empty_list">No patient records to display</string>
 
     <!-- New Patient activity -->
     <string name="title_activity_new_patient">New Patient</string>
+    <string name="action_vitals">Vitals</string>
+    <string name="action_symptoms">Vitals</string>
+    <string name="action_doctor">Vitals</string>
+    <string name="action_prescription">Vitals</string>
 
     <!-- Patient activity -->
     <string name="title_activity_patient">Patient</string>
