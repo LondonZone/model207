@@ -16,5 +16,9 @@
     <!-- Register activity -->
     <string name="title_activity_register">Register</string>
     <string name="title_activity_patient">Patient</string>
+    
+    <!-- Main (patients list) activity -->
+    <string name="action_signout">Sign out</string>
+    <string name="empty_list">No patients</string>
 
 </resources>
