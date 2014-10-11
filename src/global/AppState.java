@@ -1,10 +1,10 @@
 package global;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-import activities.LoginActivity;
 import android.app.Application;
-import android.content.Intent;
 import classes.Nurse;
 import classes.Patient;
 import classes.Physician;
@@ -25,9 +25,9 @@ public class AppState extends Application {
 
 		// Redirect to login activity if not logged in
 		if (!isLoggedIn()) {
-			Intent login = new Intent(getBaseContext(), LoginActivity.class);
-			login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivity(login);
+			// Intent login = new Intent(getBaseContext(), LoginActivity.class);
+			// login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			// startActivity(login);
 		}
 	}
 
@@ -89,6 +89,10 @@ public class AppState extends Application {
 
 	public static Map<String, Patient> getPatients() {
 		return patients;
+	}
+
+	public static List<Patient> getPatientsList() {
+		return new ArrayList<Patient>(patients.values());
 	}
 
 	public static void setPatients(Map<String, Patient> patients) {

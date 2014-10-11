@@ -19,6 +19,7 @@
 
     <!-- Main (patients list) activity -->
     <string name="action_add">Add Patient</string>
+    <string name="logged_in_as">Logged in as </string>
     <string name="action_signout">Sign out</string>
     <string name="empty_list">No patients</string>
 
