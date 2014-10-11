@@ -12,13 +12,15 @@
     <string name="action_register">Register</string>
     <string name="login_username">Username</string>
     <string name="login_password">Password</string>
-    <string name="login_empty">Please fill in both fields</string>
+    <string name="empty_fields">Please fill in all fields</string>
     <string name="login_error_pass">Password is incorrect</string>
     <string name="login_error_user">User does not exist</string>
 
     <!-- Register activity -->
     <string name="title_activity_register">Register</string>
     <string name="register_password_confirm">Confirm Password</string>
+    <string name="register_password_mismatch">Passwords do not match</string>
+    <string name="register_choose_type">Please select a user type</string>
     <string name="nurse">Nurse</string>
     <string name="physician">Physician</string>
 

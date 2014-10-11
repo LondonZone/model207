@@ -5,7 +5,9 @@ import me.echeung.triage207.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 import classes.Nurse;
@@ -25,6 +27,21 @@ public class LoginActivity extends Activity {
 		mLoginMessage = (TextView) findViewById(R.id.login_message);
 		mUsername = (EditText) findViewById(R.id.login_username);
 		mPassword = (EditText) findViewById(R.id.login_password);
+
+		// Handles the soft keyboard Login button
+		mPassword
+		.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+			@Override
+			public boolean onEditorAction(TextView textView, int id,
+					KeyEvent keyEvent) {
+				boolean handled = false;
+				if (id == R.id.login || id == EditorInfo.IME_NULL) {
+					logIn(null);
+					handled = true;
+				}
+				return handled;
+			}
+		});
 	}
 
 	/** Prevents users from going back to the main activity if not logged in */
@@ -44,7 +61,7 @@ public class LoginActivity extends Activity {
 		final String password = mPassword.getText().toString();
 
 		if (username.isEmpty() || password.isEmpty()) {
-			mLoginMessage.setText(R.string.login_empty);
+			mLoginMessage.setText(R.string.empty_fields);
 		} else {
 			// Check that the username is valid
 			if (AppState.hasNurse(username) || AppState.hasPhysician(username)) {
@@ -60,6 +77,8 @@ public class LoginActivity extends Activity {
 								username));
 
 						this.finish();
+					} else {
+						mLoginMessage.setText(R.string.login_error_pass);
 					}
 				} else if (AppState.hasPhysician(username)) {
 					Physician physician = AppState.getPhysicians()
@@ -73,9 +92,9 @@ public class LoginActivity extends Activity {
 								username));
 
 						this.finish();
+					} else {
+						mLoginMessage.setText(R.string.login_error_pass);
 					}
-				} else {
-					mLoginMessage.setText(R.string.login_error_pass);
 				}
 			} else {
 				mLoginMessage.setText(R.string.login_error_user);

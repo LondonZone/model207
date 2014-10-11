@@ -11,10 +11,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
 	private PatientsListAdapter adapter;
+
+	private TextView mCurrentUser;
 	private ListView mPatientsList;
 
 	@Override
@@ -22,7 +25,11 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		mCurrentUser = (TextView) findViewById(R.id.user);
 		mPatientsList = (ListView) findViewById(R.id.patients_list);
+
+		if (AppState.getCurrentUser() != null)
+			mCurrentUser.setText(AppState.getCurrentUser().getUsername());
 
 		updateAdapter();
 	}
