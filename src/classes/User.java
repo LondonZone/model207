@@ -18,4 +18,9 @@ public abstract class User {
 		return password;
 	}
 
+	@Override
+	public String toString() {
+		return String.format("%s, %s", this.getUsername(), this.getPassword());
+	}
+
 }

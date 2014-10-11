@@ -1,5 +1,6 @@
 package classes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Patient {
@@ -31,8 +32,23 @@ public class Patient {
 	/** True if this Patient is improving. */
 	private Boolean isImproving;
 
-	public Patient() {
+	public Patient(String firstName, String lastName, String dob,
+			String healthCard) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dob = dob;
+		this.healthCard = healthCard;
 
+		this.arrivalTime = null;
+
+		this.prescriptions = new ArrayList<Prescription>();
+		this.symptoms = new ArrayList<Symptoms>();
+		this.vitals = new ArrayList<Vitals>();
+
+		this.urgency = 0;
+		this.timeDoctor = new ArrayList<String>();
+
+		this.isImproving = false;
 	}
 
 	public String getFirstName() {
@@ -87,6 +103,10 @@ public class Patient {
 		this.prescriptions = prescriptions;
 	}
 
+	public void addPrescription(Prescription prescription) {
+		this.prescriptions.add(prescription);
+	}
+
 	public List<Symptoms> getSymptoms() {
 		return symptoms;
 	}
@@ -95,12 +115,20 @@ public class Patient {
 		this.symptoms = symptoms;
 	}
 
+	public void addSymptoms(Symptoms symptoms) {
+		this.symptoms.add(symptoms);
+	}
+
 	public List<Vitals> getVitals() {
 		return vitals;
 	}
 
 	public void setVitals(List<Vitals> vitals) {
 		this.vitals = vitals;
+	}
+
+	public void addVitals(Vitals vitals) {
+		this.vitals.add(vitals);
 	}
 
 	public Byte getUrgency() {
@@ -117,6 +145,10 @@ public class Patient {
 
 	public void setTimeDoctor(List<String> timeDoctor) {
 		this.timeDoctor = timeDoctor;
+	}
+
+	public void addTimeDoctor(String timeDoctor) {
+		this.timeDoctor.add(timeDoctor);
 	}
 
 	public Boolean getIsImproving() {

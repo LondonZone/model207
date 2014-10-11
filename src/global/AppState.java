@@ -6,6 +6,7 @@ import activities.LoginActivity;
 import android.app.Application;
 import android.content.Intent;
 import classes.Nurse;
+import classes.Patient;
 import classes.Physician;
 import classes.User;
 
@@ -16,6 +17,7 @@ public class AppState extends Application {
 
 	private static Map<String, Nurse> nurses;
 	private static Map<String, Physician> physicians;
+	private static Map<String, Patient> patients;
 
 	@Override
 	public void onCreate() {
@@ -83,6 +85,22 @@ public class AppState extends Application {
 
 	public static boolean hasPhysician(String username) {
 		return AppState.physicians.containsKey(username);
+	}
+
+	public static Map<String, Patient> getPatients() {
+		return patients;
+	}
+
+	public static void setPatients(Map<String, Patient> patients) {
+		AppState.patients = patients;
+	}
+
+	public static void addPatient(Patient patient) {
+		AppState.patients.put(patient.getHealthCard(), patient);
+	}
+
+	public static void removePatient(Patient patient) {
+		AppState.patients.remove(patient.getHealthCard());
 	}
 
 }
