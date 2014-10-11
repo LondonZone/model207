@@ -61,18 +61,18 @@ public class MainActivity extends Activity {
 
 			mPatientsList.setClickable(true);
 			mPatientsList
-			.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+					.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-				@Override
-				public void onItemClick(AdapterView<?> parent,
-						View view, int position, long id) {
-							Intent patientActivity = new Intent(
-							getBaseContext(), PatientActivity.class);
-							patientActivity.putExtra("PATIENT", position);
-							startActivity(patientActivity);
-				}
+						@Override
+						public void onItemClick(AdapterView<?> parent,
+								View view, int position, long id) {
+					Intent patientActivity = new Intent(
+									getBaseContext(), PatientActivity.class);
+					patientActivity.putExtra("PATIENT", position);
+					startActivity(patientActivity);
+						}
 
-			});
+					});
 		} else {
 			// Update with new list
 			adapter.setPatients(AppState.getPatientsList());
@@ -81,14 +81,12 @@ public class MainActivity extends Activity {
 	}
 
 	public void signOut(View view) {
-
+		AppState.setLoggedIn(false);
+		AppState.setCurrentUser(null);
+		startActivity(new Intent(this, LoginActivity.class));
 	}
 
 	public void addPatient(View view) {
-		addPatient();
-	}
-
-	public void addPatient() {
-		// startActivity(new Intent(this, null));
+		startActivity(new Intent(this, NewPatientActivity.class));
 	}
 }
