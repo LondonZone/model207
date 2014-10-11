@@ -25,12 +25,14 @@
         </activity>
         <activity
             android:name="activities.LoginActivity"
-            android:label="@string/title_activity_login" >
+            android:label="@string/title_activity_login"
+            android:theme="@style/LoginTheme" >
         </activity>
         <activity
             android:name="activities.RegisterActivity"
             android:label="@string/title_activity_register"
-            android:parentActivityName="activities.LoginActivity" >
+            android:parentActivityName="activities.LoginActivity"
+            android:theme="@style/DialogTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="activities.LoginActivity" />
@@ -38,6 +40,14 @@
         <activity
             android:name="activities.PatientActivity"
             android:label="@string/title_activity_patient"
+            android:parentActivityName="activities.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="activities.MainActivity" />
+        </activity>
+        <activity
+            android:name="activities.NewPatientActivity"
+            android:label="@string/title_activity_new_patient"
             android:parentActivityName="activities.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

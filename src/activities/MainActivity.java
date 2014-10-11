@@ -23,6 +23,8 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 		mPatientsList = (ListView) findViewById(R.id.patients_list);
+
+		updateAdapter();
 	}
 
 	@Override
@@ -59,8 +61,7 @@ public class MainActivity extends Activity {
 						View view, int position, long id) {
 							Intent patientActivity = new Intent(
 							getBaseContext(), PatientActivity.class);
-							patientActivity.putExtra("id",
-							String.valueOf(position));
+							patientActivity.putExtra("PATIENT", position);
 							startActivity(patientActivity);
 				}
 
@@ -70,5 +71,17 @@ public class MainActivity extends Activity {
 			adapter.setPatients(AppState.getPatientsList());
 			adapter.notifyDataSetChanged();
 		}
+	}
+
+	public void signOut(View view) {
+
+	}
+
+	public void addPatient(View view) {
+		addPatient();
+	}
+
+	public void addPatient() {
+		// startActivity(new Intent(this, null));
 	}
 }

@@ -5,8 +5,6 @@ import me.echeung.triage207.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -27,21 +25,6 @@ public class LoginActivity extends Activity {
 		mLoginMessage = (TextView) findViewById(R.id.login_message);
 		mUsername = (EditText) findViewById(R.id.login_username);
 		mPassword = (EditText) findViewById(R.id.login_password);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.login, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == R.id.action_register) {
-			startActivity(new Intent(this, RegisterActivity.class));
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
 	}
 
 	/** Prevents users from going back to the main activity if not logged in */
@@ -92,5 +75,9 @@ public class LoginActivity extends Activity {
 		} else {
 			mLoginMessage.setText(R.string.login_error_user);
 		}
+	}
+
+	public void register(View view) {
+		startActivity(new Intent(this, RegisterActivity.class));
 	}
 }

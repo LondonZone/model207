@@ -21,6 +21,7 @@
     <string name="action_add">Add Patient</string>
     <string name="logged_in_as">Logged in as </string>
     <string name="action_signout">Sign out</string>
-    <string name="empty_list">No patients</string>
+    <string name="empty_list">No patient records to display</string>
+    <string name="title_activity_new_patient">NewPatientActivity</string>
 
 </resources>
