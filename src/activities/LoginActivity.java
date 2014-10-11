@@ -43,41 +43,50 @@ public class LoginActivity extends Activity {
 		final String username = mUsername.getText().toString();
 		final String password = mPassword.getText().toString();
 
-		// Check that the username is valid
-		if (AppState.hasNurse(username) || AppState.hasPhysician(username)) {
-			// Sign in the Nurse or Physician if the password is correct
-			if (AppState.hasNurse(username)) {
-				Nurse nurse = AppState.getNurses().get(username);
+		if (username.isEmpty() || password.isEmpty()) {
+			mLoginMessage.setText(R.string.login_empty);
+		} else {
+			// Check that the username is valid
+			if (AppState.hasNurse(username) || AppState.hasPhysician(username)) {
+				// Sign in the Nurse or Physician if the password is correct
+				if (AppState.hasNurse(username)) {
+					Nurse nurse = AppState.getNurses().get(username);
 
-				if (nurse.getPassword().equals(password)) {
-					AppState.setLoggedIn(true);
+					if (nurse.getPassword().equals(password)) {
+						AppState.setLoggedIn(true);
 
-					// Set the current user text in the main activity
-					AppState.setCurrentUser(AppState.getNurses().get(username));
+						// Set the current user text in the main activity
+						AppState.setCurrentUser(AppState.getNurses().get(
+								username));
 
-					this.finish();
-				}
-			} else if (AppState.hasPhysician(username)) {
-				Physician physician = AppState.getPhysicians().get(username);
+						this.finish();
+					}
+				} else if (AppState.hasPhysician(username)) {
+					Physician physician = AppState.getPhysicians()
+							.get(username);
 
-				if (physician.getPassword().equals(password)) {
-					AppState.setLoggedIn(true);
+					if (physician.getPassword().equals(password)) {
+						AppState.setLoggedIn(true);
 
-					// Set the current user text in the main activity
-					AppState.setCurrentUser(AppState.getPhysicians().get(
-							username));
+						// Set the current user text in the main activity
+						AppState.setCurrentUser(AppState.getPhysicians().get(
+								username));
 
-					this.finish();
+						this.finish();
+					}
+				} else {
+					mLoginMessage.setText(R.string.login_error_pass);
 				}
 			} else {
-				mLoginMessage.setText(R.string.login_error_pass);
+				mLoginMessage.setText(R.string.login_error_user);
 			}
-		} else {
-			mLoginMessage.setText(R.string.login_error_user);
 		}
 	}
 
 	public void register(View view) {
-		startActivity(new Intent(this, RegisterActivity.class));
+		Intent registerIntent = new Intent(this, RegisterActivity.class);
+		registerIntent.putExtra("USERNAME", mUsername.getText().toString());
+		registerIntent.putExtra("PASSWORD", mPassword.getText().toString());
+		startActivity(registerIntent);
 	}
 }

@@ -17,6 +17,7 @@ public class PatientsListAdapter extends ArrayAdapter<Patient> {
 	private List<Patient> patients;
 
 	private TextView mNameView;
+	private TextView mInfoView;
 
 	public PatientsListAdapter(Context context, List<Patient> objects) {
 		super(context, R.layout.patient_list_item, objects);
@@ -37,13 +38,11 @@ public class PatientsListAdapter extends ArrayAdapter<Patient> {
 
 		Patient patient = patients.get(position);
 
-		// compsView = (LinearLayout) rowView.findViewById(R.id.comps);
-		// freeView = (TextView) rowView.findViewById(R.id.free);
-		// labView = (TextView) rowView.findViewById(R.id.lab);
-		// statsView = (TextView) rowView.findViewById(R.id.stats);
-		//
-		// // Show available machines and set the square's background colour
-		// // accordingly
+		mNameView = (TextView) rowView.findViewById(R.id.list_item_name);
+		mInfoView = (TextView) rowView.findViewById(R.id.list_item_info);
+
+		// Show available machines and set the square's background colour
+		// accordingly
 		// int avail = lab.getAvail();
 		// freeView.setText(String.valueOf(avail));
 		//
@@ -56,9 +55,9 @@ public class PatientsListAdapter extends ArrayAdapter<Patient> {
 		// else
 		// compsView.setBackgroundColor(context.getResources().getColor(
 		// R.color.free_green));
-		//
-		// // Show lab name and stats
-		// labView.setText(lab.getLab());
+
+		// Show patient name and info
+		mNameView.setText(patient.getName());
 		// statsView.setText(String.format(context.getString(R.string.stats),
 		// lab.getTotal(), lab.getPercent()));
 
