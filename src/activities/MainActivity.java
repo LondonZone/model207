@@ -12,11 +12,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import classes.Physician;
+import classes.User;
 
 public class MainActivity extends Activity {
 
 	private PatientsListAdapter adapter;
 
+	private TextView mCurrentUserType;
 	private TextView mCurrentUser;
 	private ListView mPatientsList;
 
@@ -25,18 +28,25 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		mCurrentUserType = (TextView) findViewById(R.id.logged_in_as);
 		mCurrentUser = (TextView) findViewById(R.id.user);
 		mPatientsList = (ListView) findViewById(R.id.patients_list);
 
-		if (AppState.getCurrentUser() != null)
-			mCurrentUser.setText(AppState.getCurrentUser().getUsername());
-
+		updateUserText();
 		updateAdapter();
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		if (AppState.getCurrentUser() instanceof Physician) {
+			menu.findItem(R.id.action_new).setVisible(false);
+		}
 		return true;
 	}
 
@@ -53,6 +63,20 @@ public class MainActivity extends Activity {
 		default:
 			return super.onOptionsItemSelected(item);
 		}
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		invalidateOptionsMenu();
+
+		updateUserText();
+
+		// Re-populate the patients list when the activity resumes
+		updateAdapter();
+
+		// Save file
+		// savePatients();
 	}
 
 	public void updateAdapter() {
@@ -85,6 +109,19 @@ public class MainActivity extends Activity {
 			// Update with new list
 			adapter.setPatients(AppState.getPatientsList());
 			adapter.notifyDataSetChanged();
+		}
+	}
+
+	public void updateUserText() {
+		User<?> currentUser = AppState.getCurrentUser();
+
+		if (currentUser != null) {
+			mCurrentUserType.setText(String.format("%s ",
+					currentUser instanceof Physician ? getResources()
+							.getString(R.string.physician) : getResources()
+							.getString(R.string.nurse)));
+
+			mCurrentUser.setText(currentUser.getUsername());
 		}
 	}
 

@@ -102,6 +102,10 @@ public class AppState extends Application {
 		return new ArrayList<Patient>(patients.values());
 	}
 
+	public static Patient getPatient(String healthCard) {
+		return patients.get(healthCard);
+	}
+
 	public static void setPatients(Map<String, Patient> patients) {
 		AppState.patients = patients;
 	}

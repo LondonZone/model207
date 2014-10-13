@@ -26,7 +26,6 @@
     <string name="action_search">Search</string>
     <string name="action_add">Add Patient</string>
     <string name="action_save">Save data</string>
-    <string name="logged_in_as">Logged in as </string>
     <string name="action_signout">Sign out</string>
     <string name="empty_list">No patient records to display</string>
 
@@ -36,12 +35,14 @@
     <string name="action_symptoms">Record symptoms</string>
     <string name="action_doctor">Record doctor visit</string>
     <string name="action_prescription">Record prescription</string>
-    <string name="new_prompt">Something</string>
+    <string name="new_prompt">Patient data</string>
     <string name="lastname">Last name</string>
     <string name="firstname">First name</string>
     <string name="healthcard">Health card number</string>
     <string name="dob">Date of birth</string>
-    <string name="new_time">Time</string>
+    <string name="new_time">Time: </string>
+    <string name="patient_exists">Patient already exists in database</string>
+    <string name="patient_added">Patient successfully added to database</string>
 
     <!-- Patient activity -->
     <string name="title_activity_patient">Patient</string>
