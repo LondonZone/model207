@@ -6,7 +6,10 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import classes.Nurse;
 import classes.Patient;
 
 public class PatientActivity extends Activity {
@@ -39,6 +42,23 @@ public class PatientActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.patient, menu);
+
+		if (AppState.getCurrentUser() instanceof Nurse) {
+			// Hide Physician-related actions if Nurse logged in
+			menu.findItem(R.id.action_prescription).setVisible(false);
+			((Button) findViewById(R.id.add_prescription))
+					.setVisibility(View.GONE);
+		} else {
+			// Hide Nurse-related actions if Physician logged in
+			menu.findItem(R.id.action_vitals).setVisible(false);
+			menu.findItem(R.id.action_symptoms).setVisible(false);
+			menu.findItem(R.id.action_doctor).setVisible(false);
+
+			((Button) findViewById(R.id.add_vitals)).setVisibility(View.GONE);
+			((Button) findViewById(R.id.add_symptoms)).setVisibility(View.GONE);
+			((Button) findViewById(R.id.add_time)).setVisibility(View.GONE);
+		}
+
 		return true;
 	}
 

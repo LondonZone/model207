@@ -70,14 +70,14 @@ public class AppState extends Application {
 					Toast.LENGTH_SHORT).show();
 		}
 
-		// try {
-		// AppState.patientsFile = new FileHelper<Patient>(this
-		// .getApplicationContext().getFilesDir(), PATIENTS_FILENAME,
-		// new Patient());
-		// } catch (IOException e) {
-		// Toast.makeText(getApplicationContext(), R.string.file_error,
-		// Toast.LENGTH_SHORT).show();
-		// }
+		try {
+			AppState.patientsFile = new FileHelper<Patient>(this
+					.getApplicationContext().getFilesDir(), PATIENTS_FILENAME,
+					new Patient());
+		} catch (IOException e) {
+			Toast.makeText(getApplicationContext(), R.string.file_error,
+					Toast.LENGTH_SHORT).show();
+		}
 
 		// Redirect to login activity if not logged in
 		if (!isLoggedIn()) {

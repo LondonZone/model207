@@ -1,6 +1,9 @@
 package activities;
 
 import global.AppState;
+
+import java.io.IOException;
+
 import me.echeung.triage207.R;
 import adapters.PatientsListAdapter;
 import android.app.Activity;
@@ -16,6 +19,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import classes.Physician;
 import classes.User;
 
@@ -86,6 +90,16 @@ public class MainActivity extends Activity {
 			startActivity(new Intent(this, NewPatientActivity.class));
 			return true;
 		case R.id.action_save:
+			try {
+				AppState.savePatients();
+				Toast.makeText(getApplicationContext(),
+						getString(R.string.patients_saved), Toast.LENGTH_SHORT)
+						.show();
+			} catch (IOException e) {
+				Toast.makeText(getApplicationContext(),
+						getString(R.string.file_error), Toast.LENGTH_SHORT)
+						.show();
+			}
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);

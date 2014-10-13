@@ -2,6 +2,7 @@ package activities;
 
 import global.AppState;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -104,22 +105,27 @@ public class NewPatientActivity extends Activity {
 
 		if (firstName.isEmpty() || lastName.isEmpty() || healthCard.isEmpty()
 				|| birthday.isEmpty()) {
-			Toast.makeText(this, R.string.empty_fields, Toast.LENGTH_SHORT)
-			.show();
+			Toast.makeText(this, getString(R.string.empty_fields),
+					Toast.LENGTH_SHORT).show();
 		} else {
 			if (AppState.getPatient(healthCard) == null) {
-				Patient newPatient = new Patient(firstName, lastName, birthday,
-						healthCard);
-				newPatient.setArrivalTime(currentTime);
+				AppState.addPatient(new Patient(firstName, lastName, birthday,
+						healthCard, currentTime));
 
-				AppState.addPatient(newPatient);
+				try {
+					AppState.savePatients();
+				} catch (IOException e) {
+					Toast.makeText(getApplicationContext(),
+							getString(R.string.file_error), Toast.LENGTH_SHORT)
+							.show();
+				}
 
-				Toast.makeText(this, R.string.patient_added, Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(this, getString(R.string.patient_added),
+						Toast.LENGTH_SHORT).show();
 
 				this.finish();
 			} else {
-				Toast.makeText(this, R.string.patient_exists,
+				Toast.makeText(this, getString(R.string.patient_exists),
 						Toast.LENGTH_SHORT).show();
 			}
 		}
