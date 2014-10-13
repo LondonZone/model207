@@ -4,6 +4,8 @@ import global.AppState;
 import me.echeung.triage207.R;
 import adapters.PatientsListAdapter;
 import android.app.Activity;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,6 +13,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import classes.Physician;
 import classes.User;
@@ -21,6 +25,7 @@ public class MainActivity extends Activity {
 
 	private TextView mCurrentUserType;
 	private TextView mCurrentUser;
+	private Spinner mSort;
 	private ListView mPatientsList;
 
 	@Override
@@ -30,7 +35,21 @@ public class MainActivity extends Activity {
 
 		mCurrentUserType = (TextView) findViewById(R.id.logged_in_as);
 		mCurrentUser = (TextView) findViewById(R.id.user);
+		mSort = (Spinner) findViewById(R.id.sort);
 		mPatientsList = (ListView) findViewById(R.id.patients_list);
+
+		mSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parentView,
+					View selectedItemView, int position, long id) {
+				AppState.setPatientsListSort(position);
+				updateAdapter();
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parentView) {
+			}
+		});
 
 		updateUserText();
 		updateAdapter();
@@ -39,6 +58,14 @@ public class MainActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
+
+		// Associate searchable configuration with the SearchView
+		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+		SearchView searchView = (SearchView) menu.findItem(R.id.action_search)
+				.getActionView();
+		searchView.setSearchableInfo(searchManager
+				.getSearchableInfo(getComponentName()));
+
 		return true;
 	}
 
