@@ -72,10 +72,12 @@ public class MainActivity extends Activity {
 						@Override
 						public void onItemClick(AdapterView<?> parent,
 								View view, int position, long id) {
-					Intent patientActivity = new Intent(
+							Intent patientActivity = new Intent(
 									getBaseContext(), PatientActivity.class);
-					patientActivity.putExtra("PATIENT", position);
-					startActivity(patientActivity);
+							patientActivity.putExtra("PATIENT", AppState
+									.getPatientsList().get(position)
+									.getHealthCard());
+							startActivity(patientActivity);
 						}
 
 					});

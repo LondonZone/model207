@@ -1,11 +1,17 @@
 <resources>
 
-    <style name="AppBaseTheme" parent="android:Theme.Holo.Light"></style>
+    <style name="AppBaseTheme" parent="android:Theme.Holo.Light">
+        <item name="android:actionOverflowButtonStyle">@style/Overflow</item>
+    </style>
 
     <style name="AppTheme" parent="AppBaseTheme"></style>
 
     <style name="LoginTheme" parent="android:Theme.Holo.NoActionBar"></style>
 
     <style name="DialogTheme" parent="android:Theme.Holo.Dialog"></style>
+
+    <style name="Overflow" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_action_overflow</item>
+    </style>
 
 </resources>
