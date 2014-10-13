@@ -45,7 +45,7 @@
     <string name="patient_added">Patient successfully added to database</string>
 
     <!-- Patient activity -->
-    <string name="title_activity_patient">Patient</string>
+    <string name="title_activity_patient">Patient Data</string>
     <string name="action_add_record">+</string>
     <string name="empty">No records to display</string>
     <string name="arrival_head">Arrival time</string>

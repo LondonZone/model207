@@ -80,8 +80,6 @@ public class MainActivity extends Activity {
 	}
 
 	public void updateAdapter() {
-		// Collections.sort(patients, new AlphabeticalComparator());
-
 		if (adapter == null) {
 			// Initialize adapter for the list of patients
 			adapter = new PatientsListAdapter(this, AppState.getPatientsList());
@@ -116,9 +114,10 @@ public class MainActivity extends Activity {
 		User<?> currentUser = AppState.getCurrentUser();
 
 		if (currentUser != null) {
-			mCurrentUserType.setText(String.format("%s ",
-					currentUser instanceof Physician ? getResources()
-							.getString(R.string.physician) : getResources()
+			mCurrentUserType.setText(String.format(
+					"%s ",
+					currentUser instanceof Physician ? this
+							.getString(R.string.physician) : this
 							.getString(R.string.nurse)));
 
 			mCurrentUser.setText(currentUser.getUsername());

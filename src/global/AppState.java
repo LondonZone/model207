@@ -1,6 +1,7 @@
 package global;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,9 @@ import classes.Patient;
 import classes.Physician;
 import classes.User;
 
+import comparators.AlphabeticalComparator;
+import comparators.UrgencyComparator;
+
 public class AppState extends Application {
 
 	private static boolean loggedIn;
@@ -22,6 +26,8 @@ public class AppState extends Application {
 	private static Map<String, Physician> physicians;
 	private static Map<String, Patient> patients;
 
+	private static int patientsSort;
+
 	@Override
 	public void onCreate() {
 		AppState.loggedIn = false;
@@ -29,6 +35,8 @@ public class AppState extends Application {
 		AppState.nurses = new HashMap<String, Nurse>();
 		AppState.physicians = new HashMap<String, Physician>();
 		AppState.patients = new HashMap<String, Patient>();
+
+		patientsSort = 0;
 
 		// Redirect to login activity if not logged in
 		if (!isLoggedIn()) {
@@ -99,7 +107,22 @@ public class AppState extends Application {
 	}
 
 	public static List<Patient> getPatientsList() {
-		return new ArrayList<Patient>(patients.values());
+		List<Patient> patientsList = new ArrayList<Patient>(patients.values());
+
+		if (AppState.getPatientsListSort() == 0)
+			Collections.sort(patientsList, new AlphabeticalComparator());
+		else
+			Collections.sort(patientsList, new UrgencyComparator());
+
+		return patientsList;
+	}
+
+	public static int getPatientsListSort() {
+		return patientsSort;
+	}
+
+	public static void setPatientsListSort(int sort) {
+		AppState.patientsSort = sort;
 	}
 
 	public static Patient getPatient(String healthCard) {

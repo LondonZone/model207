@@ -3,6 +3,7 @@ package adapters;
 import java.util.List;
 
 import me.echeung.triage207.R;
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +17,12 @@ public class PatientsListAdapter extends ArrayAdapter<Patient> {
 	private final Context context;
 	private List<Patient> patients;
 
-	private TextView mNameView;
-	private TextView mInfoView;
+	static class ViewHolder {
+		TextView mName;
+		TextView mHealthCard;
+		TextView mInfo;
+		int position;
+	}
 
 	public PatientsListAdapter(Context context, List<Patient> objects) {
 		super(context, R.layout.patient_list_item, objects);
@@ -31,15 +36,31 @@ public class PatientsListAdapter extends ArrayAdapter<Patient> {
 
 	@Override
 	public View getView(int position, View view, ViewGroup parent) {
-		LayoutInflater inflater = (LayoutInflater) context
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View rowView = inflater.inflate(R.layout.patient_list_item, parent,
-				false);
+		ViewHolder holder;
+
+		if (view == null) {
+			LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+			view = inflater.inflate(R.layout.patient_list_item, parent, false);
+
+			holder = new ViewHolder();
+			holder.mName = (TextView) view.findViewById(R.id.list_item_name);
+			holder.mHealthCard = (TextView) view
+					.findViewById(R.id.list_item_healthcard);
+			holder.mInfo = (TextView) view.findViewById(R.id.list_item_info);
+
+			view.setTag(holder);
+		} else {
+			holder = (ViewHolder) view.getTag();
+		}
 
 		Patient patient = patients.get(position);
 
-		mNameView = (TextView) rowView.findViewById(R.id.list_item_name);
-		mInfoView = (TextView) rowView.findViewById(R.id.list_item_info);
+		if (patient != null) {
+
+			// Show patient name and info
+			holder.mName.setText(patient.getName());
+			holder.mHealthCard.setText(patient.getHealthCard());
+		}
 
 		// Show available machines and set the square's background colour
 		// accordingly
@@ -56,11 +77,6 @@ public class PatientsListAdapter extends ArrayAdapter<Patient> {
 		// compsView.setBackgroundColor(context.getResources().getColor(
 		// R.color.free_green));
 
-		// Show patient name and info
-		mNameView.setText(patient.getName());
-		// statsView.setText(String.format(context.getString(R.string.stats),
-		// lab.getTotal(), lab.getPercent()));
-
-		return rowView;
+		return view;
 	}
 }
