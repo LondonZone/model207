@@ -1,6 +1,6 @@
 package classes;
 
-public abstract class User<T> implements Person<Object> {
+public abstract class User<T> extends Person<T> {
 
 	private final String username;
 	private final String password;

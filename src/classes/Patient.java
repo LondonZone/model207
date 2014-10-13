@@ -5,7 +5,7 @@ import global.AppState;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Patient implements Person<Object> {
+public class Patient extends Person<Patient> {
 
 	/** This Patient's first name, last name, and date of birth. */
 	private String firstName, lastName, dob;
@@ -33,6 +33,10 @@ public class Patient implements Person<Object> {
 
 	/** True if this Patient is improving. */
 	private Boolean isImproving;
+
+	public Patient() {
+
+	}
 
 	public Patient(String firstName, String lastName, String dob,
 			String healthCard) {

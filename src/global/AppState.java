@@ -1,15 +1,18 @@
 package global;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import me.echeung.triage207.R;
 import util.FileHelper;
 import activities.LoginActivity;
 import android.app.Application;
 import android.content.Intent;
+import android.widget.Toast;
 import classes.Nurse;
 import classes.Patient;
 import classes.Physician;
@@ -29,13 +32,13 @@ public class AppState extends Application {
 
 	// root/data/data/me.echeung.model207/files/
 	private static final String NURSES_FILENAME = "/nurses.txt";
-	private FileHelper<Nurse> nursesFile;
+	private static FileHelper<Nurse> nursesFile;
 
 	private static final String PHYSICIANS_FILENAME = "/physicians.txt";
-	private FileHelper<Physician> physiciansFile;
+	private static FileHelper<Physician> physiciansFile;
 
 	private static final String PATIENTS_FILENAME = "/patients.txt";
-	private FileHelper<Patient> patientsFile;
+	private static FileHelper<Patient> patientsFile;
 
 	private static int patientsSort;
 
@@ -48,6 +51,33 @@ public class AppState extends Application {
 		AppState.patients = new HashMap<String, Patient>();
 
 		patientsSort = 0;
+
+		try {
+			AppState.nursesFile = new FileHelper<Nurse>(this
+					.getApplicationContext().getFilesDir(), NURSES_FILENAME,
+					new Nurse());
+		} catch (IOException e) {
+			Toast.makeText(getApplicationContext(), R.string.file_error,
+					Toast.LENGTH_SHORT).show();
+		}
+
+		try {
+			AppState.physiciansFile = new FileHelper<Physician>(this
+					.getApplicationContext().getFilesDir(),
+					PHYSICIANS_FILENAME, new Physician());
+		} catch (IOException e) {
+			Toast.makeText(getApplicationContext(), R.string.file_error,
+					Toast.LENGTH_SHORT).show();
+		}
+
+		// try {
+		// AppState.patientsFile = new FileHelper<Patient>(this
+		// .getApplicationContext().getFilesDir(), PATIENTS_FILENAME,
+		// new Patient());
+		// } catch (IOException e) {
+		// Toast.makeText(getApplicationContext(), R.string.file_error,
+		// Toast.LENGTH_SHORT).show();
+		// }
 
 		// Redirect to login activity if not logged in
 		if (!isLoggedIn()) {
@@ -97,6 +127,10 @@ public class AppState extends Application {
 		return AppState.nurses.containsKey(username);
 	}
 
+	public static void saveNurses() throws IOException {
+		AppState.nursesFile.save(AppState.getNursesList(), false);
+	}
+
 	public static Map<String, Physician> getPhysicians() {
 		return physicians;
 	}
@@ -119,6 +153,10 @@ public class AppState extends Application {
 
 	public static boolean hasPhysician(String username) {
 		return AppState.physicians.containsKey(username);
+	}
+
+	public static void savePhysicians() throws IOException {
+		AppState.physiciansFile.save(AppState.getPhysiciansList(), false);
 	}
 
 	public static Map<String, Patient> getPatients() {
@@ -158,6 +196,10 @@ public class AppState extends Application {
 
 	public static void removePatient(Patient patient) {
 		AppState.patients.remove(patient.getHealthCard());
+	}
+
+	public static void savePatients() throws IOException {
+		AppState.patientsFile.save(AppState.getPatientsList(), false);
 	}
 
 }

@@ -5,7 +5,6 @@ import global.AppState;
 import java.io.IOException;
 
 import me.echeung.triage207.R;
-import util.FileHelper;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -19,13 +18,6 @@ import classes.Nurse;
 import classes.Physician;
 
 public class RegisterActivity extends Activity {
-
-	// root/data/data/me.echeung.model207/files/
-	private static final String NURSES_FILENAME = "/nurses.txt";
-	private FileHelper<Nurse> nursesFile;
-
-	private static final String PHYSICIANS_FILENAME = "/physicians.txt";
-	private FileHelper<Physician> physiciansFile;
 
 	private TextView mRegisterMessage;
 	private EditText mUsername;
@@ -83,11 +75,7 @@ public class RegisterActivity extends Activity {
 					AppState.addNurse(new Nurse(username, password));
 
 					try {
-						nursesFile = new FileHelper<Nurse>(this
-								.getApplicationContext().getFilesDir(),
-								NURSES_FILENAME, new Nurse());
-
-						nursesFile.save(AppState.getNursesList(), false);
+						AppState.saveNurses();
 					} catch (IOException e) {
 						Toast.makeText(getApplicationContext(),
 								R.string.file_error, Toast.LENGTH_SHORT).show();
@@ -98,12 +86,7 @@ public class RegisterActivity extends Activity {
 					AppState.addPhysician(new Physician(username, password));
 
 					try {
-						physiciansFile = new FileHelper<Physician>(this
-								.getApplicationContext().getFilesDir(),
-								PHYSICIANS_FILENAME, new Physician());
-
-						physiciansFile
-								.save(AppState.getPhysiciansList(), false);
+						AppState.savePhysicians();
 					} catch (IOException e) {
 						Toast.makeText(getApplicationContext(),
 								R.string.file_error, Toast.LENGTH_SHORT).show();

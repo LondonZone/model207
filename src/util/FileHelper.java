@@ -30,9 +30,8 @@ public class FileHelper<T extends Person<T>> {
 	 */
 	public FileHelper(File dir, String fileName, T classType)
 			throws IOException {
-		this.classType = classType;
-
 		this.file = new File(dir, fileName);
+		this.classType = classType;
 
 		// Read the file if it exists, or create a new one if it doesn't
 		if (file.exists())
@@ -53,9 +52,8 @@ public class FileHelper<T extends Person<T>> {
 		Scanner in = new Scanner(fis);
 
 		// Parse each line: instantiate the user, and add it to the list
-		while (in.hasNextLine()) {
+		while (in.hasNextLine())
 			classType.scan(in.nextLine().split(", "));
-		}
 
 		fis.close();
 		in.close();
