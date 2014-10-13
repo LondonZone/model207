@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import util.FileHelper;
 import activities.LoginActivity;
 import android.app.Application;
 import android.content.Intent;
@@ -25,6 +26,16 @@ public class AppState extends Application {
 	private static Map<String, Nurse> nurses;
 	private static Map<String, Physician> physicians;
 	private static Map<String, Patient> patients;
+
+	// root/data/data/me.echeung.model207/files/
+	private static final String NURSES_FILENAME = "/nurses.txt";
+	private FileHelper<Nurse> nursesFile;
+
+	private static final String PHYSICIANS_FILENAME = "/physicians.txt";
+	private FileHelper<Physician> physiciansFile;
+
+	private static final String PATIENTS_FILENAME = "/patients.txt";
+	private FileHelper<Patient> patientsFile;
 
 	private static int patientsSort;
 
@@ -66,6 +77,10 @@ public class AppState extends Application {
 		return nurses;
 	}
 
+	public static List<Nurse> getNursesList() {
+		return new ArrayList<Nurse>(nurses.values());
+	}
+
 	public static void setNurses(Map<String, Nurse> nurses) {
 		AppState.nurses = nurses;
 	}
@@ -84,6 +99,10 @@ public class AppState extends Application {
 
 	public static Map<String, Physician> getPhysicians() {
 		return physicians;
+	}
+
+	public static List<Physician> getPhysiciansList() {
+		return new ArrayList<Physician>(physicians.values());
 	}
 
 	public static void setPhysicians(Map<String, Physician> physicians) {

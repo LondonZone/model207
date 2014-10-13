@@ -4,6 +4,7 @@
     <string name="app_name">Triage 207</string>
     <string name="done">Done</string>
     <string name="cancel">Cancel</string>
+    <string name="file_error">File error</string>
 
     <!-- Login activity -->
     <string name="title_activity_login">Login</string>

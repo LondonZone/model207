@@ -1,9 +1,11 @@
 package classes;
 
+import global.AppState;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Patient {
+public class Patient implements Person<Object> {
 
 	/** This Patient's first name, last name, and date of birth. */
 	private String firstName, lastName, dob;
@@ -157,5 +159,127 @@ public class Patient {
 
 	public void setIsImproving(Boolean isImproving) {
 		this.isImproving = isImproving;
+	}
+
+	/**
+	 * Parses the contents of fields and instantiates a Patient object. It is
+	 * then added to the ER database.
+	 *
+	 * @param fields
+	 *            An array of contents used to instantiate the object.
+	 */
+	@Override
+	public void scan(String[] fields) {
+		Patient patient = new Patient(fields[0], fields[1], fields[2],
+				fields[3]);
+		String[] subset = new String[] { fields[5], fields[6], fields[7],
+				fields[8], fields[9], fields[10] };
+		// scanRecords(patient, subset);
+		AppState.addPatient(patient);
+	}
+
+	/**
+	 * Parses the fields that contain this Patient's records and adds it to the
+	 * Patient object.
+	 *
+	 * @param patient
+	 *            The Patient to add the records to.
+	 * @param fields
+	 *            The records to add to the Patient.
+	 */
+	private void scanRecords(Patient patient, String[] fields) {
+		// // symptoms
+		// if (fields[0].indexOf(';') > 1) {
+		// for (String s : fields[0].split(";")) {
+		// String[] symptom = s.split("=");
+		// Symptoms newSymptoms = new Symptoms(
+		// symptom[1].replace(".", ","));
+		// newSymptoms.setTime(symptom[0]);
+		// patient.addSymptoms(newSymptoms);
+		// }
+		// }
+		//
+		// // vitals
+		// if (fields[1].indexOf(';') > 1) {
+		// for (String v : fields[1].split(";")) {
+		// String[] vital = v.split("=");
+		// String[] numbers = vital[1].split(",");
+		// Vitals newVitals = new Vitals(Double.parseDouble(numbers[0]),
+		// Double.parseDouble(numbers[1]),
+		// Double.parseDouble(numbers[2]),
+		// Double.parseDouble(numbers[3]));
+		// newVitals.setTime(vital[0]);
+		// patient.addVitals(newVitals);
+		// }
+		// }
+		//
+		// // urgency
+		// patient.setUrgency(Byte.valueOf(fields[2]));
+		//
+		// // isImproving
+		// patient.setIsImproving(Boolean.parseBoolean(fields[3]));
+		//
+		// // timeDoctor
+		// if (fields[4].indexOf(';') > 1)
+		// for (String t : fields[4].split(";"))
+		// patient.addTimeDoctor(t);
+		//
+		// // prescriptions
+		// if (fields[5].indexOf(';') > 1) {
+		// for (String p : fields[5].split(";")) {
+		// String[] prescription = p.split("=");
+		// String[] parts = prescription[1].split(",");
+		// Prescription newPrescription = new Prescription(
+		// parts[0].replace(".", ","), parts[1].replace(".", ","));
+		// newPrescription.setTime(prescription[0]);
+		// patient.addPrescriptions(newPrescription);
+		// }
+		// }
+	}
+
+	/**
+	 * Returns this Patient's string representation, that includes of all of the
+	 * Patient's information and records, in CSV format.
+	 *
+	 * @return This Patient's string representation, in CSV format.
+	 */
+	@Override
+	public String toString() {
+		// Symptoms records, from oldest to newest
+		String symptomsList = "";
+		if (!this.getSymptoms().isEmpty())
+			for (Symptoms s : this.getSymptoms())
+				symptomsList = s.toString() + ";" + symptomsList;
+		else
+			symptomsList = " ";
+
+		// Vitals records, from oldest to newest
+		String vitalsList = "";
+		if (!this.getVitals().isEmpty())
+			for (Vitals v : this.getVitals())
+				vitalsList = v.toString() + ";" + vitalsList;
+		else
+			vitalsList = " ";
+
+		// Times seen by doctor, from oldest to newest
+		String timeDoctorList = "";
+		if (!this.getTimeDoctor().isEmpty())
+			for (String t : this.getTimeDoctor())
+				timeDoctorList = t + ";" + timeDoctorList;
+		else
+			timeDoctorList = " ";
+
+		// Prescription records, from oldest to newest
+		String prescriptionList = "";
+		if (!this.getPrescriptions().isEmpty())
+			for (Prescription p : this.getPrescriptions())
+				prescriptionList = p.toString() + ";" + prescriptionList;
+		else
+			prescriptionList = " ";
+
+		return String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s",
+				this.firstName, this.lastName, this.dob, this.healthCard,
+				this.arrivalTime, symptomsList, vitalsList, this.urgency,
+				this.isImproving, timeDoctorList, prescriptionList);
 	}
 }

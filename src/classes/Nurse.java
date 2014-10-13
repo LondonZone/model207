@@ -4,6 +4,10 @@ import global.AppState;
 
 public class Nurse extends User<Nurse> {
 
+	public Nurse() {
+		super(null, null);
+	}
+
 	public Nurse(String username, String password) {
 		super(username, password);
 	}
@@ -56,27 +60,15 @@ public class Nurse extends User<Nurse> {
 
 	/**
 	 * Parses the contents of fields and instantiates this Nurse object. It is
-	 * then added to the ER database and returned.
+	 * then added to the ER database.
 	 *
 	 * @param fields
 	 *            An array of contents used to instantiate this Nurse.
-	 * @return The instantiated Nurse.
 	 */
 	@Override
-	public Nurse scan(String[] fields) {
+	public void scan(String[] fields) {
 		Nurse nurse = new Nurse(fields[0], fields[1]);
 		AppState.addNurse(nurse);
-		return nurse;
-	}
-
-	/**
-	 * Returns this Nurse's string representation, in CSV format.
-	 *
-	 * @return This Nurse's string representation, in CSV format.
-	 */
-	@Override
-	public String toString() {
-		return "n, " + super.toString();
 	}
 
 }

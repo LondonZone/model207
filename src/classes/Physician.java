@@ -4,6 +4,10 @@ import global.AppState;
 
 public class Physician extends User<Physician> {
 
+	public Physician() {
+		super(null, null);
+	}
+
 	public Physician(String username, String password) {
 		super(username, password);
 	}
@@ -25,26 +29,14 @@ public class Physician extends User<Physician> {
 
 	/**
 	 * Parses the contents of fields and instantiates this Physician. It is then
-	 * added to the ER database and returned.
+	 * added to the ER database.
 	 *
 	 * @param fields
 	 *            An array of contents used to instantiate this Physician.
-	 * @return The instantiated Physician.
 	 */
 	@Override
-	public Physician scan(String[] fields) {
+	public void scan(String[] fields) {
 		Physician physician = new Physician(fields[0], fields[1]);
 		AppState.addPhysician(physician);
-		return physician;
-	}
-
-	/**
-	 * Returns the String representation of this Physician, in CSV format.
-	 *
-	 * @return The String representation of this Physician, in CSV format.
-	 */
-	@Override
-	public String toString() {
-		return "p, " + super.toString();
 	}
 }

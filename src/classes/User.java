@@ -1,6 +1,6 @@
 package classes;
 
-public abstract class User<T> {
+public abstract class User<T> implements Person<Object> {
 
 	private final String username;
 	private final String password;
@@ -16,10 +16,6 @@ public abstract class User<T> {
 
 	public String getPassword() {
 		return password;
-	}
-
-	public T scan(String[] record) {
-		return null;
 	}
 
 	@Override
