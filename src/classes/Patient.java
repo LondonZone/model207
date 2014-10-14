@@ -2,8 +2,12 @@ package classes;
 
 import global.AppState;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import android.annotation.SuppressLint;
 
 public class Patient extends Person<Patient> {
 
@@ -135,6 +139,7 @@ public class Patient extends Person<Patient> {
 
 	public void addVitals(Vitals vitals) {
 		this.vitals.add(0, vitals);
+		updateUrgencyImproving();
 	}
 
 	public Byte getUrgency() {
@@ -163,6 +168,72 @@ public class Patient extends Person<Patient> {
 
 	public void setIsImproving(Boolean isImproving) {
 		this.isImproving = isImproving;
+	}
+
+	public void updateUrgencyImproving() {
+		if (!this.getVitals().isEmpty()) {
+			byte urgency = 0;
+			Vitals v = this.getVitals().get(0);
+
+			// age < 2 years
+			if (calculateAge(this.getDob()) < 2)
+				urgency += 1;
+
+			// Temp >= 39
+			if (v.getTemperature() >= 39.0)
+				urgency += 1;
+
+			// BP: sys >= 140 or dia >= 90
+			if (v.getSystolicBP() >= 140.0 || v.getDiastolicBP() >= 90.0)
+				urgency += 1;
+
+			// heart rate: >= 100 or <= 50
+			if (v.getHeartRate() >= 100.0 || v.getHeartRate() <= 50)
+				urgency += 1;
+
+			byte prevUrgency = this.urgency;
+			this.setUrgency(urgency);
+			this.setIsImproving(!(prevUrgency < urgency));
+		}
+	}
+
+	/**
+	 * Calculates and returns this Patient's age relative to the current date.
+	 *
+	 * @param dob
+	 *            This Patient's date of birth.
+	 * @return This Patient's age relative to the current date.
+	 */
+	@SuppressLint("SimpleDateFormat")
+	private int calculateAge(String dob) {
+		int year, month, day, yearDob, monthDob, dayDob, age;
+
+		// Date of birth
+		yearDob = Integer.parseInt(dob.substring(0, 4));
+		monthDob = Integer.parseInt(dob.substring(5, 7));
+		dayDob = Integer.parseInt(dob.substring(8, 10));
+
+		// Today's date
+		SimpleDateFormat dateFormat;
+		Date date = new Date();
+
+		dateFormat = new SimpleDateFormat("yyyy");
+		year = Integer.parseInt(dateFormat.format(date));
+		dateFormat = new SimpleDateFormat("MM");
+		month = Integer.parseInt(dateFormat.format(date));
+		dateFormat = new SimpleDateFormat("dd");
+		day = Integer.parseInt(dateFormat.format(date));
+
+		// Calculate age
+		age = year - yearDob;
+
+		// Birthday checks
+		if (month < monthDob)
+			--age;
+		if (month == monthDob && day < dayDob)
+			--age;
+
+		return age;
 	}
 
 	/**

@@ -111,6 +111,14 @@ public class MainActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == 0) {
 			updateAdapter();
+
+			try {
+				AppState.savePatients();
+			} catch (IOException e) {
+				Toast.makeText(getApplicationContext(),
+						getString(R.string.file_error), Toast.LENGTH_SHORT)
+						.show();
+			}
 		}
 	}
 
@@ -120,12 +128,14 @@ public class MainActivity extends Activity {
 		invalidateOptionsMenu();
 
 		updateUserText();
-
-		// Re-populate the patients list when the activity resumes
 		updateAdapter();
 
-		// Save file
-		// AppState.savePatients();
+		try {
+			AppState.savePatients();
+		} catch (IOException e) {
+			Toast.makeText(getApplicationContext(),
+					getString(R.string.file_error), Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	public void updateAdapter() {
