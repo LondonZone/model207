@@ -60,22 +60,9 @@ public class PatientsListAdapter extends ArrayAdapter<Patient> {
 			// Show patient name and info
 			holder.mName.setText(patient.getName());
 			holder.mHealthCard.setText(patient.getHealthCard());
+			holder.mInfo.setText(String.format("%s | %s",
+					patient.getIsImproving(), patient.getUrgency()));
 		}
-
-		// Show available machines and set the square's background colour
-		// accordingly
-		// int avail = lab.getAvail();
-		// freeView.setText(String.valueOf(avail));
-		//
-		// if (avail == 0)
-		// compsView.setBackgroundColor(context.getResources().getColor(
-		// R.color.free_red));
-		// else if (avail <= 5)
-		// compsView.setBackgroundColor(context.getResources().getColor(
-		// R.color.free_orange));
-		// else
-		// compsView.setBackgroundColor(context.getResources().getColor(
-		// R.color.free_green));
 
 		return view;
 	}

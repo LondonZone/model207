@@ -250,26 +250,34 @@ public class Patient extends Person<Patient> {
 	@Override
 	public String toString() {
 		// Symptoms records, from oldest to newest
-		String symptomsList = " ";
-		if (!this.getSymptoms().isEmpty())
+		String symptomsList = "";
+		if (this.getSymptoms().isEmpty())
+			symptomsList = " ";
+		else
 			for (Symptoms s : this.getSymptoms())
 				symptomsList = s.toString() + ";" + symptomsList;
 
 		// Vitals records, from oldest to newest
-		String vitalsList = " ";
-		if (!this.getVitals().isEmpty())
+		String vitalsList = "";
+		if (this.getVitals().isEmpty())
+			vitalsList = " ";
+		else
 			for (Vitals v : this.getVitals())
 				vitalsList = v.toString() + ";" + vitalsList;
 
 		// Times seen by doctor, from oldest to newest
-		String timeDoctorList = " ";
-		if (!this.getTimeDoctor().isEmpty())
+		String timeDoctorList = "";
+		if (this.getTimeDoctor().isEmpty())
+			timeDoctorList = " ";
+		else
 			for (String t : this.getTimeDoctor())
 				timeDoctorList = t.toString() + ";" + timeDoctorList;
 
 		// Prescription records, from oldest to newest
-		String prescriptionList = " ";
-		if (!this.getPrescriptions().isEmpty())
+		String prescriptionList = "";
+		if (this.getPrescriptions().isEmpty())
+			prescriptionList = " ";
+		else
 			for (Prescription p : this.getPrescriptions())
 				prescriptionList = p.toString() + ";" + prescriptionList;
 
