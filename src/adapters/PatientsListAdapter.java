@@ -60,8 +60,9 @@ public class PatientsListAdapter extends ArrayAdapter<Patient> {
 			// Show patient name and info
 			holder.mName.setText(patient.getName());
 			holder.mHealthCard.setText(patient.getHealthCard());
-			holder.mInfo.setText(String.format("%s | %s",
-					patient.getIsImproving(), patient.getUrgency()));
+			holder.mInfo.setText(String.format("%s | Urgency: %s",
+					patient.getIsImproving() ? "Improving" : "Not improving",
+					patient.getUrgency()));
 		}
 
 		return view;
