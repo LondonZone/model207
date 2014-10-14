@@ -87,7 +87,8 @@ public class MainActivity extends Activity {
 		case R.id.action_search:
 			return true;
 		case R.id.action_new:
-			startActivity(new Intent(this, NewPatientActivity.class));
+			startActivityForResult(new Intent(this, NewPatientActivity.class),
+					0);
 			return true;
 		case R.id.action_save:
 			try {
@@ -103,6 +104,13 @@ public class MainActivity extends Activity {
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
+		}
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == 0) {
+			updateAdapter();
 		}
 	}
 
