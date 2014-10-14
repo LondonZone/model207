@@ -110,7 +110,7 @@ public class Patient extends Person<Patient> {
 	}
 
 	public void addPrescription(Prescription prescription) {
-		this.prescriptions.add(prescription);
+		this.prescriptions.add(0, prescription);
 	}
 
 	public List<Symptoms> getSymptoms() {
@@ -122,7 +122,7 @@ public class Patient extends Person<Patient> {
 	}
 
 	public void addSymptoms(Symptoms symptoms) {
-		this.symptoms.add(symptoms);
+		this.symptoms.add(0, symptoms);
 	}
 
 	public List<Vitals> getVitals() {
@@ -134,7 +134,7 @@ public class Patient extends Person<Patient> {
 	}
 
 	public void addVitals(Vitals vitals) {
-		this.vitals.add(vitals);
+		this.vitals.add(0, vitals);
 	}
 
 	public Byte getUrgency() {
@@ -154,7 +154,7 @@ public class Patient extends Person<Patient> {
 	}
 
 	public void addTimeDoctor(String timeDoctor) {
-		this.timeDoctor.add(timeDoctor);
+		this.timeDoctor.add(0, timeDoctor);
 	}
 
 	public Boolean getIsImproving() {
@@ -175,7 +175,7 @@ public class Patient extends Person<Patient> {
 	@Override
 	public void scan(String[] fields) {
 		Patient patient = new Patient(fields[0], fields[1], fields[2],
-				fields[3], fields[4]);
+				fields[3], fields[4].replace(";", ","));
 		scanRecords(patient, new String[] { fields[5], fields[6], fields[7],
 				fields[8], fields[9], fields[10] });
 
@@ -250,40 +250,33 @@ public class Patient extends Person<Patient> {
 	@Override
 	public String toString() {
 		// Symptoms records, from oldest to newest
-		String symptomsList = "";
-		if (this.getSymptoms().isEmpty())
-			symptomsList = " ";
-		else
+		String symptomsList = " ";
+		if (!this.getSymptoms().isEmpty())
 			for (Symptoms s : this.getSymptoms())
 				symptomsList = s.toString() + ";" + symptomsList;
 
 		// Vitals records, from oldest to newest
-		String vitalsList = "";
-		if (this.getVitals().isEmpty())
-			vitalsList = " ";
-		else
+		String vitalsList = " ";
+		if (!this.getVitals().isEmpty())
 			for (Vitals v : this.getVitals())
 				vitalsList = v.toString() + ";" + vitalsList;
 
 		// Times seen by doctor, from oldest to newest
-		String timeDoctorList = "";
-		if (this.getTimeDoctor().isEmpty())
-			timeDoctorList = " ";
-		else
+		String timeDoctorList = " ";
+		if (!this.getTimeDoctor().isEmpty())
 			for (String t : this.getTimeDoctor())
 				timeDoctorList = t.toString() + ";" + timeDoctorList;
 
 		// Prescription records, from oldest to newest
-		String prescriptionList = "";
-		if (this.getPrescriptions().isEmpty())
-			prescriptionList = " ";
-		else
+		String prescriptionList = " ";
+		if (!this.getPrescriptions().isEmpty())
 			for (Prescription p : this.getPrescriptions())
 				prescriptionList = p.toString() + ";" + prescriptionList;
 
 		return String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s",
 				this.firstName, this.lastName, this.dob, this.healthCard,
-				this.arrivalTime, symptomsList, vitalsList, this.urgency,
-				this.isImproving, timeDoctorList, prescriptionList);
+				this.arrivalTime.replace(",", ";"), symptomsList, vitalsList,
+				this.urgency, this.isImproving, timeDoctorList,
+				prescriptionList);
 	}
 }

@@ -59,7 +59,7 @@ public class PatientActivity extends Activity {
 			// Hide Physician-related actions if Nurse logged in
 			menu.findItem(R.id.action_prescription).setVisible(false);
 			((Button) findViewById(R.id.add_prescription))
-					.setVisibility(View.GONE);
+			.setVisibility(View.GONE);
 		} else {
 			// Hide Nurse-related actions if Physician logged in
 			menu.findItem(R.id.action_vitals).setVisible(false);
@@ -90,7 +90,7 @@ public class PatientActivity extends Activity {
 		case R.id.action_doctor:
 			// Get the current time and add it to the Patient's records
 			patient.addTimeDoctor(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-			.format(Calendar.getInstance().getTime()));
+					.format(Calendar.getInstance().getTime()));
 			updateStats();
 			return true;
 		case R.id.action_prescription:
@@ -139,7 +139,7 @@ public class PatientActivity extends Activity {
 	@SuppressLint("SimpleDateFormat")
 	public void addTime(View view) {
 		patient.addTimeDoctor(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-		.format(Calendar.getInstance().getTime()));
+				.format(Calendar.getInstance().getTime()));
 		updateStats();
 	}
 
@@ -153,6 +153,13 @@ public class PatientActivity extends Activity {
 		Intent intent = new Intent(this, activity);
 		intent.putExtra("PATIENT", patient.getHealthCard());
 		startActivityForResult(intent, 0);
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == 0) {
+			updateStats();
+		}
 	}
 
 	/**
@@ -192,8 +199,8 @@ public class PatientActivity extends Activity {
 						v.getTime(), v.getTemperature())
 						+ String.format("Blood pressure: %s mmHg / %s mmHg\n",
 								v.getSystolicBP(), v.getDiastolicBP())
-								+ String.format("Heart rate: %s bpm\n",
-										v.getHeartRate());
+						+ String.format("Heart rate: %s bpm\n",
+								v.getHeartRate());
 
 			((TextView) findViewById(R.id.vitals)).setText(vitalsText);
 		}
@@ -229,7 +236,7 @@ public class PatientActivity extends Activity {
 						p.getName(), p.getInstructions());
 
 			((TextView) findViewById(R.id.prescriptions))
-			.setText(prescriptionsText);
+					.setText(prescriptionsText);
 		}
 	}
 }
