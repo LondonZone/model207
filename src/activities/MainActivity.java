@@ -139,6 +139,7 @@ public class MainActivity extends Activity {
 	}
 
 	public void updateAdapter() {
+
 		if (adapter == null) {
 			// Initialize adapter for the list of patients
 			adapter = new PatientsListAdapter(this, AppState.getPatientsList());

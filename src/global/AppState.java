@@ -174,6 +174,20 @@ public class AppState extends Application {
 		return patientsList;
 	}
 
+	public static List<Patient> getPatientsList(String query) {
+		List<Patient> patientsList = new ArrayList<Patient>();
+
+		for (Patient p : patients.values()) {
+			if (p.getHealthCard().contains(query)
+					|| p.getName().contains(query))
+				patientsList.add(p);
+		}
+
+		System.out.println(patientsList);
+
+		return patientsList;
+	}
+
 	public static int getPatientsListSort() {
 		return patientsSort;
 	}
