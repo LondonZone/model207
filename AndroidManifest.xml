@@ -69,6 +69,30 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="activities.MainActivity" />
         </activity>
+        <activity
+            android:name="activities.VitalsActivity"
+            android:label="@string/title_activity_vitals"
+            android:parentActivityName="activities.PatientActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="activities.PatientActivity" />
+        </activity>
+        <activity
+            android:name="activities.PrescriptionActivity"
+            android:label="@string/title_activity_prescription"
+            android:parentActivityName="activities.PatientActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="activities.PatientActivity" />
+        </activity>
+        <activity
+            android:name="activities.SymptomsActivity"
+            android:label="@string/title_activity_symptoms"
+            android:parentActivityName="activities.PatientActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="activities.PatientActivity" />
+        </activity>
     </application>
 
 </manifest>

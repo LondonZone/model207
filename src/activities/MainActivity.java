@@ -117,7 +117,7 @@ public class MainActivity extends Activity {
 		updateAdapter();
 
 		// Save file
-		// savePatients();
+		// AppState.savePatients();
 	}
 
 	public void updateAdapter() {
@@ -130,20 +130,20 @@ public class MainActivity extends Activity {
 
 			mPatientsList.setClickable(true);
 			mPatientsList
-					.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-						@Override
-						public void onItemClick(AdapterView<?> parent,
-								View view, int position, long id) {
-							Intent patientActivity = new Intent(
-									getBaseContext(), PatientActivity.class);
-							patientActivity.putExtra("PATIENT", AppState
-									.getPatientsList().get(position)
-									.getHealthCard());
-							startActivity(patientActivity);
-						}
+				@Override
+				public void onItemClick(AdapterView<?> parent,
+						View view, int position, long id) {
+					Intent patientActivity = new Intent(
+							getBaseContext(), PatientActivity.class);
+					patientActivity.putExtra("PATIENT", AppState
+							.getPatientsList().get(position)
+							.getHealthCard());
+					startActivity(patientActivity);
+				}
 
-					});
+			});
 		} else {
 			// Update with new list
 			adapter.setPatients(AppState.getPatientsList());

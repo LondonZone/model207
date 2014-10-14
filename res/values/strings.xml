@@ -61,5 +61,10 @@
 
     <!-- Search results -->
     <string name="title_activity_search_results">SearchResultsActivity</string>
+    <string name="title_activity_vitals">VitalsActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_prescription">PrescriptionActivity</string>
+    <string name="title_activity_symptoms">SymptomsActivity</string>
 
 </resources>
