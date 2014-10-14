@@ -65,16 +65,20 @@ public class VitalsActivity extends Activity {
 
 	/** Adds the Vitals to the Patient's records. */
 	private void addVitals() {
-		final Double newTemp = Double.parseDouble(mTemp.getText().toString());
-		final Double newSys = Double.parseDouble(mSys.getText().toString());
-		final Double newDia = Double.parseDouble(mDia.getText().toString());
-		final Double newHeart = Double.parseDouble(mHeart.getText().toString());
-
-		if (newTemp.isNaN() || newSys.isNaN() || newDia.isNaN()
-				|| newHeart.isNaN()) {
+		if (mTemp.getText().toString().isEmpty()
+				|| mSys.getText().toString().isEmpty()
+				|| mDia.getText().toString().isEmpty()
+				|| mHeart.getText().toString().isEmpty()) {
 			Toast.makeText(this, getString(R.string.empty_fields),
 					Toast.LENGTH_SHORT).show();
 		} else {
+			final Double newTemp = Double.parseDouble(mTemp.getText()
+					.toString());
+			final Double newSys = Double.parseDouble(mSys.getText().toString());
+			final Double newDia = Double.parseDouble(mDia.getText().toString());
+			final Double newHeart = Double.parseDouble(mHeart.getText()
+					.toString());
+
 			patient.addVitals(new Vitals(newTemp, newSys, newDia, newHeart));
 			this.finish();
 		}
