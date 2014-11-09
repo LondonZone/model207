@@ -39,7 +39,7 @@ public class SearchResultsActivity extends Activity {
 		}
 	}
 
-	public void updateAdapter(String query) {
+	public void updateAdapter(final String query) {
 		if (adapter == null) {
 			// Initialize adapter for the list of patients
 			adapter = new PatientsListAdapter(this,
@@ -58,7 +58,7 @@ public class SearchResultsActivity extends Activity {
 					Intent patientActivity = new Intent(
 							getBaseContext(), PatientActivity.class);
 					patientActivity.putExtra("PATIENT", AppState
-							.getPatientsList().get(position)
+							.getPatientsList(query).get(position)
 							.getHealthCard());
 					startActivity(patientActivity);
 				}

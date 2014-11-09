@@ -183,8 +183,6 @@ public class AppState extends Application {
 				patientsList.add(p);
 		}
 
-		System.out.println(patientsList);
-
 		return patientsList;
 	}
 
