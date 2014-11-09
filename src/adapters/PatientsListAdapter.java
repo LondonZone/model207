@@ -14,9 +14,6 @@ import classes.Patient;
 
 public class PatientsListAdapter extends ArrayAdapter<Patient> {
 
-	private final Context context;
-	private List<Patient> patients;
-
 	static class ViewHolder {
 		TextView mName;
 		TextView mHealthCard;
@@ -26,12 +23,14 @@ public class PatientsListAdapter extends ArrayAdapter<Patient> {
 
 	public PatientsListAdapter(Context context, List<Patient> objects) {
 		super(context, R.layout.patient_list_item, objects);
-		this.context = context;
-		this.patients = objects;
 	}
 
-	public void setPatients(List<Patient> patients) {
-		this.patients = patients;
+	public void updatePatients(List<Patient> patients) {
+		this.clear();
+		for (Patient patient : patients) {
+			this.insert(patient, this.getCount());
+		}
+		this.notifyDataSetChanged();
 	}
 
 	@Override
@@ -39,7 +38,8 @@ public class PatientsListAdapter extends ArrayAdapter<Patient> {
 		ViewHolder holder;
 
 		if (view == null) {
-			LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+			LayoutInflater inflater = ((Activity) getContext())
+					.getLayoutInflater();
 			view = inflater.inflate(R.layout.patient_list_item, parent, false);
 
 			holder = new ViewHolder();
@@ -53,7 +53,7 @@ public class PatientsListAdapter extends ArrayAdapter<Patient> {
 			holder = (ViewHolder) view.getTag();
 		}
 
-		Patient patient = patients.get(position);
+		Patient patient = this.getItem(position);
 
 		if (patient != null) {
 
@@ -62,7 +62,7 @@ public class PatientsListAdapter extends ArrayAdapter<Patient> {
 			holder.mHealthCard.setText(patient.getHealthCard());
 			holder.mInfo.setText(String.format("%s | Urgency: %s",
 					patient.getIsImproving() ? "Improving" : "Not improving",
-					patient.getUrgency()));
+							patient.getUrgency()));
 		}
 
 		return view;

@@ -66,8 +66,7 @@ public class SearchResultsActivity extends Activity {
 			});
 		} else {
 			// Update with new list
-			adapter.setPatients(AppState.getPatientsList(query));
-			adapter.notifyDataSetChanged();
+			adapter.updatePatients(AppState.getPatientsList(query));
 		}
 	}
 }

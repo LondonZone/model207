@@ -164,8 +164,7 @@ public class MainActivity extends Activity {
 					});
 		} else {
 			// Update with new list
-			adapter.setPatients(AppState.getPatientsList());
-			adapter.notifyDataSetChanged();
+			adapter.updatePatients(AppState.getPatientsList());
 		}
 	}
 
