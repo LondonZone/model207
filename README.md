@@ -1,7 +1,7 @@
 model207
 ========
 
-Model answer for CSC207 Project (2014 Fall).
+An example model answer for CSC207 Project (2014 Fall).
 
 Created using Eclipse 4.4.0 (Luna). 
 
